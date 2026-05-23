@@ -38,7 +38,8 @@ nav{
     repeating-linear-gradient(-45deg,rgba(255,255,255,0.025) 0,rgba(255,255,255,0.025) 1px,transparent 1px,transparent 32px);
 }
 .hero-diamonds{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-.hd{position:absolute;transform:rotate(45deg);}
+.hd{position:absolute;transform:rotate(45deg);animation:floatDiamond var(--dur,8s) ease-in-out var(--delay,0s) infinite;}
+@keyframes floatDiamond{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(-12px);}}
 .hero-tag{
   display:inline-block;background:rgba(255,255,255,0.12);
   color:rgba(255,255,255,0.7);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
@@ -319,7 +320,9 @@ function makeDiamonds(containerId,colors,count){
     const d=document.createElement('div');
     d.className='hd';
     const s=8+Math.random()*18;
-    d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:${0.12+Math.random()*0.18};`;
+    const dur=(6+Math.random()*8).toFixed(1);
+    const delay=(Math.random()*6).toFixed(1);
+    d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:${(0.12+Math.random()*0.20).toFixed(2)};--dur:${dur}s;--delay:-${delay}s;`;
     c.appendChild(d);
   }
 }
